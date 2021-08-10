@@ -31,7 +31,8 @@ export default function CallToActionWithIllustration() {
           </Text>
         </Heading>
         <Text color={'gray.800'} maxW={'3xl'}>
-          けあプラとは､どんな方にも使いやすい計画を作れるアプリです｡高年齢層の方にも使いやす行く､ついつい手を触れてしまいたくなるような､わかりやすくタッチすることなども意識した設計になっています｡
+          けあプラとは､どんな方にも使いやすい計画を作れるアプリです｡
+          高年齢層の方にも使いやすく､ついつい手を触れてしまいたくなるような設計になっています｡
         </Text>
         <Stack spacing={6} direction={'row'}>
           <Link href={'/signup'}>

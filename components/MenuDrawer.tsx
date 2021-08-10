@@ -46,6 +46,11 @@ export const MenuDrawer: VFC<Props> = (props) => {
               設定
             </Button>
           </Link>
+          <Link href={'/'}>
+            <Button w="100%" onClick={onClose}>
+              紹介ページ
+            </Button>
+          </Link>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
