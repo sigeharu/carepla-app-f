@@ -10,7 +10,10 @@ export const useMutateDiary = () => {
 
   const createDiaryMutation = useMutation(
     (diary: Omit<EditedDiary, 'id'>) =>
-      axios.post<Diary>('http://localhost:3001/api/v1/diaries/', diary),
+      axios.post<Diary>(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/diaries/`,
+        diary
+      ),
     {
       onSuccess: (res) => {
         const previousDiary = queryClient.getQueryData<Diary[]>('diary')
@@ -28,7 +31,7 @@ export const useMutateDiary = () => {
   const updateDiaryMutation = useMutation(
     (diary: EditedDiary) =>
       axios.put<Diary>(
-        `http://localhost:3001/api/v1/diaries/${diary.id}/`,
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/diaries/${diary.id}/`,
         diary
       ),
     {
@@ -47,7 +50,8 @@ export const useMutateDiary = () => {
     }
   )
   const deleteDiaryMutation = useMutation(
-    (id: number) => axios.delete(`http://localhost:3001/api/v1/diaries/${id}/`),
+    (id: number) =>
+      axios.delete(`${process.env.NEXT_PUBLIC_RESTAPI_URL}/diaries/${id}/`),
     {
       onSuccess: (res, variables) => {
         const previousDiary = queryClient.getQueryData<Diary[]>('diary')

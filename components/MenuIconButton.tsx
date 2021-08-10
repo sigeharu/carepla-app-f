@@ -14,7 +14,6 @@ export const MenuIconButton: VFC<Props> = (props) => {
       icon={<HamburgerIcon />}
       size="sm"
       variant="unstyled"
-      display={{ base: 'block', md: 'none' }}
       onClick={onOpen}
     />
   )

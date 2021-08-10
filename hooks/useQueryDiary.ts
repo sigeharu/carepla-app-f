@@ -5,7 +5,7 @@ import { Diary, EditedDiary } from '../types/types'
 export const useQueryDiary = () => {
   const getDiary = async () => {
     const { data } = await axios.get<Diary[]>(
-      `http://localhost:3001/api/v1/diaries/`
+      `${process.env.NEXT_PUBLIC_RESTAPI_URL}/diaries/`
     )
     return data
   }

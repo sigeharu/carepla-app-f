@@ -81,13 +81,13 @@ const Dashboard: VFC = () => {
               </Text>
             </Box>
           </HStack>
-          <VStack>
+          <Stack>
             <Collapse in={openIndex} animateOpacity>
               <Box mt="2" rounded="md" shadow="md">
                 <ScheduleCompletionListMemo />
               </Box>
             </Collapse>
-          </VStack>
+          </Stack>
         </Box>
       </Box>
       <Stack mt={4}>

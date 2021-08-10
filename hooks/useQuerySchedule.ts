@@ -5,7 +5,7 @@ import { Schedule } from '../types/types'
 export const useQuerySchedule = () => {
   const getSchedule = async () => {
     const { data } = await axios.get<Schedule[]>(
-      `http://localhost:3001/api/v1/schedules/`
+      `${process.env.NEXT_PUBLIC_RESTAPI_URL}/schedules/`
     )
     return data
   }

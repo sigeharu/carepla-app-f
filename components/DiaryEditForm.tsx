@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectUser } from '../slices/userSlice'
 import { selectDiary, setEditedDiary } from '../slices/diarySlice'
 import { useMutateDiary } from '../hooks/useMutateDiary'
-import { Textarea, VStack } from '@chakra-ui/react'
+import { Box, Textarea, VStack } from '@chakra-ui/react'
 import { useQueryDiary } from '../hooks/useQueryDiary'
 import dayjs from 'dayjs'
 import { DiaryItemMemo } from './DiaryItem'
@@ -29,12 +29,15 @@ const DiaryEditForm: VFC = () => {
     return <span>Creating...</span>
   }
   return (
-    <VStack className="justify-center text-center">
-      {data?.map(
-        (diary) =>
-          now.isSame(diary.created_at, 'day') &&
-          diary.user_id === User?.id && <DiaryItemMemo diary={diary} />
-      )}
+    <Box>
+      <VStack className="justify-center text-center">
+        {data?.map(
+          (diary) =>
+            now.isSame(diary.created_at, 'day') &&
+            diary.user_id === User?.id && <DiaryItemMemo diary={diary} />
+        )}
+      </VStack>
+
       <form onSubmit={submitHandler}>
         <Textarea
           className="my-2 px-3 py-2 border border-gray-300"
@@ -60,7 +63,7 @@ const DiaryEditForm: VFC = () => {
           新規作成
         </button>
       </form>
-    </VStack>
+    </Box>
   )
 }
 export const DiaryEditFormMemo = memo(DiaryEditForm)

@@ -10,7 +10,10 @@ export const useMutateSchedule = () => {
 
   const createScheduleMutation = useMutation(
     (schedule: Omit<EditedSchedule, 'id'>) =>
-      axios.post<Schedule>('http://localhost:3001/api/v1/schedules/', schedule),
+      axios.post<Schedule>(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/schedules/`,
+        schedule
+      ),
     {
       onSuccess: (res) => {
         const previousSchedule =
@@ -28,7 +31,7 @@ export const useMutateSchedule = () => {
   const updateScheduleMutation = useMutation(
     (schedule: EditedSchedule) =>
       axios.put<Schedule>(
-        `http://localhost:3001/api/v1/schedules/${schedule.id}/`,
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/schedules/${schedule.id}/`,
         schedule
       ),
     {
@@ -49,7 +52,7 @@ export const useMutateSchedule = () => {
   )
   const deleteScheduleMutation = useMutation(
     (id: number) =>
-      axios.delete(`http://localhost:3001/api/v1/schedules/${id}/`),
+      axios.delete(`${process.env.NEXT_PUBLIC_RESTAPI_URL}/schedules/${id}/`),
     {
       onSuccess: (res, variables) => {
         const previousSchedule =

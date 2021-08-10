@@ -59,7 +59,14 @@ const SignUp: () => void = () => {
         dispatch(setUser(res.data.data))
 
         router.push('/dashboard')
-        showMessage({ title: 'ユーザーを新規作成しました', status: 'success' })
+        showMessage({
+          title: '新規作成しました!',
+          status: 'success',
+        })
+        showMessage({
+          title: 'ようこそ『けあプラ』へあなたを歓迎します!',
+          status: 'info',
+        })
       } else {
         showMessage({
           title: '入力に誤りがあります｡再度登録してください｡',
