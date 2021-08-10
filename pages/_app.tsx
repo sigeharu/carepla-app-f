@@ -24,10 +24,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       },
     },
   })
-  // const [loading, setLoading] = useState<boolean>(true)
-  // const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
-  // const [currentUser, setCurrentUser] = useState<User | undefined>()
-  // const router = useRouter()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
+  const [currentUser, setCurrentUser] = useState<User | undefined>()
+  const router = useRouter()
 
   // 認証済みのユーザーがいるかどうかチェック
   // 確認できた場合はそのユーザーの情報を取得
@@ -67,7 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   //       return <div>rendering...</div>
   //     }
   //   } else {
-  //     return <div>not page</div>
+  //     router.push('/signin')
   //   }
   // }
 

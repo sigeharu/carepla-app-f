@@ -58,6 +58,10 @@ const SignIn: React.FC = () => {
 
         router.push('/dashboard')
         showMessage({ title: 'ログインしました', status: 'success' })
+        showMessage({
+          title: 'ようこそ『けあプラ』へあなたを歓迎します♪',
+          status: 'info',
+        })
 
         console.log('Signed in successfully!')
       } else {
