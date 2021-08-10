@@ -27,6 +27,7 @@ const ScheduleItem: VFC<Props> = ({ schedule }) => {
                 id: schedule.id,
                 title: schedule.title,
                 schedule_date: schedule.schedule_date,
+                completion: false,
                 user_id: schedule.user_id,
               })
             )
