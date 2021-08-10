@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Diary } from '../types/types'
-import { useAppDispatch, useAppSelector } from './hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectDiary, setEditedDiary } from '../slices/diarySlice'
 import { useMutateDiary } from '../hooks/useMutateDiary'
 import { useMessage } from '../hooks/useMessage'
