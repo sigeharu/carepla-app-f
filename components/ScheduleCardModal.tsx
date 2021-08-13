@@ -112,8 +112,8 @@ const ScheduleCardModal: VFC<Props> = (props) => {
 
           <Center>
             <ModalFooter>
-              <VStack>
-                <HStack>
+              <VStack spacing="3">
+                <HStack spacing="5">
                   <Button
                     colorScheme="teal"
                     onClick={onClickCompletionUpdateHandler}
@@ -150,7 +150,7 @@ const ScheduleCardModal: VFC<Props> = (props) => {
                     schedule={schedule}
                   />
                 </HStack>
-                <HStack>
+                <HStack spacing="5">
                   <Button colorScheme="purple">週間予定に設定</Button>
                   <Button colorScheme="gray" onClick={onCloseDialog}>
                     閉じる

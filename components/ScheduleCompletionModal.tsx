@@ -75,7 +75,7 @@ const ScheduleCompletionModal: VFC<Props> = (props) => {
 
           <Center>
             <ModalFooter>
-              <HStack>
+              <HStack spacing="5">
                 <Button colorScheme="teal" onClick={onClickUpdateHandler}>
                   未完了に戻す
                 </Button>

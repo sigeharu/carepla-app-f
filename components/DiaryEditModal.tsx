@@ -70,7 +70,7 @@ const DiaryEditModal: VFC<Props> = (props) => {
 
             <Center>
               <ModalFooter>
-                <HStack>
+                <HStack spacing="5">
                   <Button colorScheme="green" type="submit">
                     変更
                   </Button>
