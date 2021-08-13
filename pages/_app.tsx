@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import React, { createContext, useEffect, useState } from 'react'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import axiosBase from 'axios'
 
 import { User } from '../types/types'
 import { getCurrentUser } from '../lib/api/auth'
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       },
     },
   })
+
   const [loading, setLoading] = useState<boolean>(true)
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<User | undefined>()

@@ -61,6 +61,8 @@ export interface Schedule {
   title: string
   schedule_date: Date
   completion: boolean
+  takeover: boolean
+  time_none: boolean
   user_id: number
   created_at: Date
   updated_at: Date
@@ -70,6 +72,8 @@ export interface EditedSchedule {
   id: number
   title: string
   schedule_date: Date
-  user_id: number
   completion: boolean
+  takeover: boolean
+  time_none: boolean
+  user_id: number
 }

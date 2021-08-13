@@ -1,31 +1,15 @@
 import { memo, useState, VFC } from 'react'
-import { useAppSelector } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectUser } from '../slices/userSlice'
 import { useQuerySchedule } from '../hooks/useQuerySchedule'
 import { Box, Heading, HStack, Wrap, WrapItem } from '@chakra-ui/react'
 import dayjs from 'dayjs'
 
 import { ScheduleCompletionModalMemo } from './ScheduleCompletionModal'
-
-const Feature = ({ title, desc, ...rest }) => {
-  return (
-    <Box
-      p={2}
-      shadow="md"
-      borderWidth="1px"
-      borderRadius="md"
-      bg="teal.100"
-      {...rest}
-    >
-      <Heading fontSize="md">
-        {desc}~<br />
-        {title}
-      </Heading>
-    </Box>
-  )
-}
+import { setEditedSchedule } from '../slices/scheduleSlice'
 
 const ScheduleCompletionList: VFC = () => {
+  const dispatch = useAppDispatch()
   const User = useAppSelector(selectUser)
   const { status, data } = useQuerySchedule()
   const [selectedItem, setSelectedItem] = useState<number>(null)
@@ -58,17 +42,35 @@ const ScheduleCompletionList: VFC = () => {
                   bg="white"
                   lineHeight="0"
                   _hover={{ boxShadow: 'dark-lg' }}
-                  onClick={() => onOpenDialog(schedule.id)}
+                  onClick={() => {
+                    dispatch(
+                      setEditedSchedule({
+                        ...schedule,
+                      })
+                    ),
+                      onOpenDialog(schedule.id)
+                  }}
                 >
                   <ScheduleCompletionModalMemo
                     selectedItem={selectedItem}
                     onCloseDialog={onCloseDialog}
                     schedule={schedule}
                   />
-                  <Feature
-                    title={schedule.title}
-                    desc={dayjs(schedule.schedule_date).format('HH:mm')}
-                  />
+                  <Box
+                    p={2}
+                    shadow="md"
+                    borderWidth="1px"
+                    borderRadius="md"
+                    bg="teal.100"
+                  >
+                    <Heading fontSize="md">
+                      {schedule.time_none
+                        ? ''
+                        : dayjs(schedule.schedule_date).format('HH:mm~ ')}
+
+                      {schedule.title}
+                    </Heading>
+                  </Box>
                 </WrapItem>
               )
           )}

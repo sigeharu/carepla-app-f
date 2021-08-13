@@ -19,6 +19,7 @@ const ScheduleWeeklyCard: VFC<Props> = (props) => {
   const schedules = data
     ?.sort((a, b) => (a.schedule_date > b.schedule_date ? 1 : -1))
     .filter((schedule) => schedule.user_id === User?.id)
+  const handleClick = () => {}
 
   if (status === 'loading') return <div>{'Loading...'}</div>
   if (status === 'error') return <div>{'Error'}</div>
@@ -31,11 +32,14 @@ const ScheduleWeeklyCard: VFC<Props> = (props) => {
         (schedule) =>
           now.day(dayNumber).isSame(schedule.schedule_date, 'day') && (
             <HStack my={2}>
-              <Text>
-                {dayjs(schedule.schedule_date).format('HH:mm')}
-                {'~'}
-                {schedule.title}
-              </Text>
+              {schedule.time_none ? (
+                ''
+              ) : (
+                <Text className="font-bold text-blue-600">
+                  {dayjs(schedule.schedule_date).format('HH:mm')}~
+                </Text>
+              )}
+              <Text className="font-bold">{schedule.title}</Text>
             </HStack>
           )
       )}

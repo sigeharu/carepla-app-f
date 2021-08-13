@@ -12,6 +12,8 @@ const initialState: scheduleState = {
     title: '',
     schedule_date: null,
     completion: false,
+    takeover: false,
+    time_none: false,
     user_id: null,
   },
 }
