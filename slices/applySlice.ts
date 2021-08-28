@@ -8,6 +8,7 @@ export interface applyState {
 
 const initialState: applyState = {
   editedApply: {
+    id: null,
     user_id: null,
     partner_id: null,
     comment: '',
