@@ -1,14 +1,5 @@
 import exp from 'constants'
 
-export interface TodayTask {
-  id: number
-  title: string
-  comment: string
-  scheduleTaskTime: string
-  created_at: string
-  updated_at: string
-}
-
 export interface EditedDiary {
   id: number
   comment: string
@@ -48,12 +39,6 @@ export interface User {
   allowPasswordChange: boolean
   created_at: Date
   updated_at: Date
-}
-
-export interface ApprovalUser {
-  id: number
-  email: string
-  name: string
 }
 
 export interface AuthSingInParams {
