@@ -50,6 +50,12 @@ export interface User {
   updated_at: Date
 }
 
+export interface ApprovalUser {
+  id: number
+  email: string
+  name: string
+}
+
 export interface AuthSingInParams {
   isSignedIn: boolean
   email: ''
@@ -76,4 +82,51 @@ export interface EditedSchedule {
   takeover: boolean
   time_none: boolean
   user_id: number
+}
+
+export interface Partner {
+  id: number
+  partner_group: string
+  partner_group_description: string
+  admin_user: number
+  recruit_partner: boolean
+  created_at: Date
+  updated_at: Date
+  users: User[]
+}
+
+export interface EditedPartner {
+  id: number
+  partner_group: string
+  partner_group_description: string
+  admin_user: number
+  recruit_partner: boolean
+}
+
+export interface PartnerApproval {
+  id: number
+  comment: string
+  partner_approval: boolean
+  from_user: number
+  for_user: number
+}
+
+export interface GroupSearch {
+  keyword: string | null
+}
+
+export interface Apply {
+  id: number
+  user_id: number
+  partner_id: number
+  comment: string
+  user_name: string
+  for_user: number
+}
+
+export interface PartnerApply {
+  id: number
+  partner_group: string
+  admin_user: number
+  applies: Apply[]
 }

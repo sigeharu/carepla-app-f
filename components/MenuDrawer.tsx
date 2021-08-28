@@ -31,6 +31,16 @@ export const MenuDrawer: VFC<Props> = (props) => {
               トップページ
             </Button>
           </Link>
+          <Link href={'/partner'}>
+            <Button w="100%" onClick={onClose}>
+              パートナー
+            </Button>
+          </Link>
+          <Link href={'/group'}>
+            <Button w="100%" onClick={onClose}>
+              グループ
+            </Button>
+          </Link>
           <Link href={'/comment-index'}>
             <Button w="100%" onClick={onClose}>
               日記一覧
