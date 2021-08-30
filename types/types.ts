@@ -1,5 +1,3 @@
-import exp from 'constants'
-
 export interface EditedDiary {
   id: number
   comment: string
@@ -114,4 +112,10 @@ export interface PartnerApply {
   partner_group: string
   admin_user: number
   applies: Apply[]
+}
+
+export interface PartnerApplyApproval {
+  user_id: number
+  partner_id: number
+  apply_id: number
 }

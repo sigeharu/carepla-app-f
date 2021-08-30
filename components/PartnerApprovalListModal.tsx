@@ -1,4 +1,4 @@
-import React, { FormEvent, memo, VFC } from 'react'
+import React, { FormEvent, memo, MouseEventHandler, VFC } from 'react'
 import { useQueryPartner } from '../hooks/useQueryPartner'
 import {
   Box,
@@ -11,6 +11,7 @@ import {
   HStack,
   Input,
   SimpleGrid,
+  Tag,
   Text,
   Textarea,
   VStack,
@@ -36,6 +37,11 @@ import {
 import { setEditedApproval } from '../slices/approvalSlice'
 import { Apply, Partner, PartnerApply, PartnerApproval } from '../types/types'
 import { useQueryPartnerApproval } from '../hooks/useQueryPartnerApproval'
+import {
+  selectApply,
+  selectPartnerApplyApproval,
+  setEditedPartnerApplyApproval,
+} from '../slices/applySlice'
 
 export interface Props {
   isOpen: boolean
@@ -46,11 +52,20 @@ export interface Props {
 const PartnerApprovalListModal: VFC<Props> = (props) => {
   const dispatch = useAppDispatch()
   const editedPartner = useAppSelector(selectPartner)
+  const editedPartnerApplyApproval = useAppSelector(selectPartnerApplyApproval)
   const User = useAppSelector(selectUser)
   const { isOpen, onClose, partnerApply } = props
   // const { data: partnerApproval } = useQueryPartnerApproval()
-  const { createGroupMutation } = useMutatePartner()
+  const { createPartnerMutation } = useMutatePartner()
   const { status, data } = useQueryPartner()
+  const onClickHandler = (apply) => {
+    createPartnerMutation.mutate({
+      user_id: apply.user_id,
+      partner_id: apply.partner_id,
+      apply_id: apply.id,
+    })
+    onClose()
+  }
   return (
     <>
       <Modal
@@ -68,8 +83,17 @@ const PartnerApprovalListModal: VFC<Props> = (props) => {
               <VStack>
                 {partnerApply.map((apply) => (
                   <Box bg="teal.300" p={2} rounded={10} key={apply.id}>
-                    <Text>{apply.comment}</Text>
-                    <Text>{apply.user_name}</Text>
+                    <Text>
+                      <Tag bg="purple.200">メッセージ</Tag> {apply.comment}
+                    </Text>
+                    <Text p={2}>
+                      <Tag bg="orange.200">申請者</Tag> {apply.user_name}
+                    </Text>
+                    <Center>
+                      <Button size="lg" onClick={() => onClickHandler(apply)}>
+                        承認
+                      </Button>
+                    </Center>
                   </Box>
                 ))}
               </VStack>
@@ -79,7 +103,9 @@ const PartnerApprovalListModal: VFC<Props> = (props) => {
               <ModalFooter>
                 <VStack spacing="3">
                   <Center>
-                    <Button size="lg">承認</Button>
+                    <Button size="lg" onClick={onClose}>
+                      閉じる
+                    </Button>
                   </Center>
                 </VStack>
               </ModalFooter>

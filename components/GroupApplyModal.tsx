@@ -46,6 +46,7 @@ const GroupApplyModal: VFC<Props> = (props) => {
     e.preventDefault()
     createApplyMutation.mutate(editedApply)
     showMessage({ title: 'パートナー申請しました!', status: 'success' })
+    onCloseGroupPartnerDialog()
   }
   return (
     <Box>
@@ -111,7 +112,11 @@ const GroupApplyModal: VFC<Props> = (props) => {
                     <Button bg="teal.500" textColor="white" type="submit">
                       申請
                     </Button>
-                    <Button bg="purple.300" textColor="white">
+                    <Button
+                      bg="purple.300"
+                      textColor="white"
+                      onClick={onCloseGroupPartnerDialog}
+                    >
                       閉じる
                     </Button>
                   </HStack>

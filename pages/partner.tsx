@@ -32,6 +32,7 @@ import { useQueryClient } from 'react-query'
 import { useMessage } from '../hooks/useMessage'
 import { PartnerSearchModalMemo } from '../components/PartnerSearchModal'
 import { GroupApplyModalMemo } from '../components/GroupApplyModal'
+import { useQueryApply } from '../hooks/useQueryApply'
 
 const Partner: VFC = () => {
   const dispatch = useAppDispatch()

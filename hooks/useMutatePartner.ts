@@ -2,7 +2,13 @@ import axios from 'axios'
 import { useAppDispatch } from '../app/hooks'
 import { useQueryClient, useMutation } from 'react-query'
 import { resetEditedPartner } from '../slices/partnerSlice'
-import { EditedPartner, Partner } from '../types/types'
+import {
+  Apply,
+  EditedPartner,
+  Partner,
+  PartnerApplyApproval,
+} from '../types/types'
+import { resetEditedPartnerApplyApproval } from '../slices/applySlice'
 
 export const useMutatePartner = () => {
   const dispatch = useAppDispatch()
@@ -63,21 +69,21 @@ export const useMutatePartner = () => {
     }
   )
   const createPartnerMutation = useMutation(
-    (id: number) =>
-      axios.post<Partner>(
-        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/partners/${id}/join/`,
-        id
+    (partnerApplyApproval: PartnerApplyApproval) =>
+      axios.post<Apply>(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/partners/${partnerApplyApproval.partner_id}/group_users/`,
+        partnerApplyApproval
       ),
     {
-      onSuccess: (res) => {
-        const previousPartner = queryClient.getQueryData<Partner[]>('partner')
-        if (previousPartner) {
-          queryClient.setQueryData<Partner[]>('partner', [
-            res.data,
-            ...previousPartner,
-          ])
+      onSuccess: (res, variables) => {
+        const previousApply = queryClient.getQueryData<Apply[]>('applies')
+        if (previousApply) {
+          queryClient.setQueryData<Apply[]>(
+            'applies',
+            previousApply.filter((apply) => apply.id !== variables.apply_id)
+          )
         }
-        dispatch(resetEditedPartner())
+        dispatch(resetEditedPartnerApplyApproval())
       },
     }
   )
