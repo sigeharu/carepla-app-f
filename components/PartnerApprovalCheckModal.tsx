@@ -36,7 +36,7 @@ import {
 import { setEditedApproval } from '../slices/approvalSlice'
 import { Partner, PartnerApproval } from '../types/types'
 import { useQueryPartnerApproval } from '../hooks/useQueryPartnerApproval'
-import { useQueryApplying } from '../hooks/useQueryApply'
+import { useQueryApplying } from '../hooks/useQueryApplying'
 
 export interface Props {
   selectedPartnerApprovalCheckItem: number
