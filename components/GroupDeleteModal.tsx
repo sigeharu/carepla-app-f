@@ -51,10 +51,18 @@ const GroupDeleteModal: VFC<Props> = (props) => {
             <ModalFooter>
               <VStack>
                 <HStack>
-                  <Button colorScheme="red" onClick={onClickHandler}>
+                  <Button
+                    bg="orange.300"
+                    textColor="white"
+                    onClick={onClickHandler}
+                  >
                     削除
                   </Button>
-                  <Button colorScheme="gray" onClick={onCloseDeleteDialog}>
+                  <Button
+                    bg="purple.300"
+                    textColor="white"
+                    onClick={onCloseDeleteDialog}
+                  >
                     やめる
                   </Button>
                 </HStack>

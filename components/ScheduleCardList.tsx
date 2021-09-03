@@ -22,12 +22,12 @@ const ScheduleCardList: VFC = () => {
           .map(
             (schedule) =>
               (schedule.takeover && (
-                <ScheduleWrapItemMemo schedule={schedule} />
+                <ScheduleWrapItemMemo key={schedule.id} schedule={schedule} />
               )) ||
               (now.isSame(schedule.schedule_date, 'day') &&
                 schedule.user_id === User?.id &&
                 !schedule.completion && (
-                  <ScheduleWrapItemMemo schedule={schedule} />
+                  <ScheduleWrapItemMemo key={schedule.id} schedule={schedule} />
                 ))
           )}
       </Wrap>

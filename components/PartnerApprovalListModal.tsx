@@ -36,7 +36,7 @@ import {
 } from '@chakra-ui/modal'
 import { setEditedApproval } from '../slices/approvalSlice'
 import { Apply, Partner, PartnerApply, PartnerApproval } from '../types/types'
-import { useQueryPartnerApproval } from '../hooks/useQueryPartnerApproval'
+import { useQueryPartnerApply } from '../hooks/useQueryPartnerApply'
 import {
   selectApply,
   selectPartnerApplyApproval,
@@ -46,7 +46,7 @@ import {
 export interface Props {
   isOpen: boolean
   onClose: () => void
-  partnerApply: Apply[]
+  applying: Apply[]
 }
 
 const PartnerApprovalListModal: VFC<Props> = (props) => {
@@ -54,8 +54,7 @@ const PartnerApprovalListModal: VFC<Props> = (props) => {
   const editedPartner = useAppSelector(selectPartner)
   const editedPartnerApplyApproval = useAppSelector(selectPartnerApplyApproval)
   const User = useAppSelector(selectUser)
-  const { isOpen, onClose, partnerApply } = props
-  // const { data: partnerApproval } = useQueryPartnerApproval()
+  const { isOpen, onClose, applying } = props
   const { createPartnerMutation } = useMutatePartner()
   const { status, data } = useQueryPartner()
   const onClickHandler = (apply) => {
@@ -81,7 +80,7 @@ const PartnerApprovalListModal: VFC<Props> = (props) => {
           <form>
             <ModalBody>
               <VStack>
-                {partnerApply.map((apply) => (
+                {applying.map((apply) => (
                   <Box bg="teal.300" p={2} rounded={10} key={apply.id}>
                     <Text>
                       <Tag bg="purple.200">メッセージ</Tag> {apply.comment}
@@ -90,9 +89,12 @@ const PartnerApprovalListModal: VFC<Props> = (props) => {
                       <Tag bg="orange.200">申請者</Tag> {apply.user_name}
                     </Text>
                     <Center>
-                      <Button size="lg" onClick={() => onClickHandler(apply)}>
-                        承認
-                      </Button>
+                      <HStack>
+                        <Button onClick={() => onClickHandler(apply)}>
+                          申請を承認
+                        </Button>
+                        <Button>申請を拒否</Button>
+                      </HStack>
                     </Center>
                   </Box>
                 ))}

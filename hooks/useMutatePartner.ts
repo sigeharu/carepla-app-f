@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useAppDispatch } from '../app/hooks'
+import {useAppDispatch, useAppSelector} from '../app/hooks'
 import { useQueryClient, useMutation } from 'react-query'
 import { resetEditedPartner } from '../slices/partnerSlice'
 import {
@@ -8,11 +8,17 @@ import {
   Partner,
   PartnerApplyApproval,
 } from '../types/types'
-import { resetEditedPartnerApplyApproval } from '../slices/applySlice'
+import {
+  resetEditedApply,
+  resetEditedPartnerApplyApproval,
+} from '../slices/applySlice'
+import {selectUser} from "../slices/userSlice";
+
 
 export const useMutatePartner = () => {
   const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
+  const User = useAppSelector(selectUser)
 
   const createGroupSearchMutation = useMutation(
     (keyword: string) =>
@@ -53,9 +59,6 @@ export const useMutatePartner = () => {
     {
       onSuccess: (res, variables) => {
         const previousGroup = queryClient.getQueryData<Partner[]>('partner')
-        console.log(previousGroup)
-        console.log(res.data)
-        console.log(variables.id)
         if (previousGroup) {
           queryClient.setQueryData<Partner[]>(
             'partner',
@@ -93,7 +96,6 @@ export const useMutatePartner = () => {
     {
       onSuccess: (res, variables) => {
         const previousGroup = queryClient.getQueryData<Partner[]>('partner')
-        console.log(previousGroup)
         if (previousGroup) {
           queryClient.setQueryData<Partner[]>(
             'partner',
@@ -104,11 +106,30 @@ export const useMutatePartner = () => {
       },
     }
   )
+  const deleteApplyMutation = useMutation(
+    (id: number) =>
+      axios.delete(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/partners/0/applies/${id}/`
+      ),
+    {
+      onSuccess: (res, variables) => {
+        const previousApply = queryClient.getQueryData<Apply[]>('applies')
+        if (previousApply) {
+          queryClient.setQueryData<Apply[]>(
+            'applies',
+            previousApply.filter((apply) => apply.id !== variables)
+          )
+        }
+        dispatch(resetEditedApply())
+      },
+    }
+  )
   return {
     createGroupSearchMutation,
     createGroupMutation,
     updateGroupMutation,
     createPartnerMutation,
     deleteGroupMutation,
+    deleteApplyMutation,
   }
 }

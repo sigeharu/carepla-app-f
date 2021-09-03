@@ -53,9 +53,9 @@ const ScheduleEditForm: VFC = () => {
   }
   const ChangeButton = () => {
     if (customDateFormat === 'yyyy/MM/dd aa hh:mm') {
-      return <Button onClick={onClickTimeNoneHandler}>時間あり</Button>
+      return <Button onClick={onClickTimeNoneHandler}>時間設定あり</Button>
     } else {
-      return <Button onClick={onClickTimeHandler}>時間なし</Button>
+      return <Button onClick={onClickTimeHandler}>時間設定なし</Button>
     }
   }
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -67,10 +67,10 @@ const ScheduleEditForm: VFC = () => {
     return <span>Creating...</span>
   }
   return (
-    <Box>
+    <VStack>
       <form onSubmit={submitHandler}>
         <Textarea
-          className="mb-3"
+          className="mb-2"
           bg="white"
           placeholder="予定作成"
           type="text"
@@ -85,42 +85,43 @@ const ScheduleEditForm: VFC = () => {
           }
           value={editedSchedule.title}
         />
+        <DatePicker
+          className="px-12 py-2 border text-center  border-gray-300 rounded-md"
+          selected={
+            editedSchedule.schedule_date
+              ? new Date(editedSchedule.schedule_date)
+              : new Date()
+          }
+          onChange={(date) =>
+            dispatch(
+              setEditedSchedule({
+                ...editedSchedule,
+                schedule_date: date,
+              })
+            )
+          }
+          locale="ja"
+          timeInputLabel="時間:"
+          timeIntervals={15}
+          showTimeSelect
+          dateFormat={customDateFormat}
+        />
+        <HStack spacing={2} mt={2}>
+          <ChangeButton />
+          <Button>週間予定に設定</Button>
+        </HStack>
         <Center>
-          <HStack>
-            <DatePicker
-              className="px-3 py-2 border border-gray-300 rounded-md"
-              selected={
-                editedSchedule.schedule_date
-                  ? new Date(editedSchedule.schedule_date)
-                  : new Date()
-              }
-              onChange={(date) =>
-                dispatch(
-                  setEditedSchedule({
-                    ...editedSchedule,
-                    schedule_date: date,
-                  })
-                )
-              }
-              locale="ja"
-              timeInputLabel="時間:"
-              timeIntervals={15}
-              showTimeSelect
-              dateFormat={customDateFormat}
-            />
-            <ChangeButton />
-          </HStack>
-        </Center>
-        <Center>
-          <button
-            className="disabled:opacity-40 mb-10 mt-3 mx-3 py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded"
+          <Button
+            mt={2}
+            textColor="white"
+            bg="orange.400"
             disabled={!editedSchedule.title || !editedSchedule.schedule_date}
           >
             予定作成
-          </button>
+          </Button>
         </Center>
       </form>
-    </Box>
+    </VStack>
   )
 }
 

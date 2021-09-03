@@ -1,4 +1,4 @@
-import React, { useEffect, useState, VFC } from 'react'
+import React, { useState, VFC } from 'react'
 import {
   Box,
   Button,
@@ -9,26 +9,23 @@ import {
   HStack,
   Spacer,
   VStack,
-  Center,
-  Tag,
 } from '@chakra-ui/react'
 import { DiaryEditFormMemo } from '../components/DiaryEditForm'
 import { ScheduleCardListMemo } from '../components/ScheduleCardList'
 import { ScheduleEditFormMemo } from '../components/ScheduleEditForm'
 import { ScheduleCompletionListMemo } from '../components/ScheduleCompletionList'
 import { useQuerySchedule } from '../hooks/useQuerySchedule'
-import { useQueryPartnerApproval } from '../hooks/useQueryPartnerApproval'
 import dayjs from 'dayjs'
 import { useAppSelector } from '../app/hooks'
 import { selectUser } from '../slices/userSlice'
 import { PartnerApprovalCheckMemo } from '../components/PartnerApprovalCheck'
-import { useQueryApply } from '../hooks/useQueryApply'
+import { useQueryApplying } from '../hooks/useQueryApplying'
 
 const Dashboard: VFC = () => {
   const User = useAppSelector(selectUser)
   const { isOpen, onToggle } = useDisclosure()
   const { data } = useQuerySchedule()
-  const { data: partnerApply } = useQueryApply()
+  const { data: applying } = useQueryApplying()
   const [openEdit, setOpenEdit] = useState(false)
   const [openIndex, setOpenIndex] = useState(false)
   const now = dayjs()
@@ -56,7 +53,8 @@ const Dashboard: VFC = () => {
       schedule
   )
   const partnerApprovalPresent = () => {
-    if (partnerApply?.length) {
+    console.log(applying)
+    if (applying?.length) {
       return <PartnerApprovalCheckMemo />
     }
   }

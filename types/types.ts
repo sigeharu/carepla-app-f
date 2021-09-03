@@ -76,6 +76,7 @@ export interface Partner {
   created_at: Date
   updated_at: Date
   users: User[]
+  applies: Apply[]
 }
 
 export interface EditedPartner {

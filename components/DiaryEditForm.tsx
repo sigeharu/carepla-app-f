@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectUser } from '../slices/userSlice'
 import { selectDiary, setEditedDiary } from '../slices/diarySlice'
 import { useMutateDiary } from '../hooks/useMutateDiary'
-import { Box, Center, Textarea, VStack } from '@chakra-ui/react'
+import { Box, Button, Center, Textarea, VStack } from '@chakra-ui/react'
 import { useQueryDiary } from '../hooks/useQueryDiary'
 import dayjs from 'dayjs'
 import { DiaryItemMemo } from './DiaryItem'
@@ -57,12 +57,13 @@ const DiaryEditForm: VFC = () => {
         />
 
         <Center>
-          <button
-            className="disabled:opacity-40 mt-2 mx-3 py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded"
+          <Button
+            bg="orange.400"
+            textColor="white"
             disabled={!editedDiary.comment}
           >
             新規作成
-          </button>
+          </Button>
         </Center>
       </form>
     </Box>

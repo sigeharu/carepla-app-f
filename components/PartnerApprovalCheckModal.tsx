@@ -36,7 +36,7 @@ import {
 import { setEditedApproval } from '../slices/approvalSlice'
 import { Partner, PartnerApproval } from '../types/types'
 import { useQueryPartnerApproval } from '../hooks/useQueryPartnerApproval'
-import { useQueryApply } from '../hooks/useQueryApply'
+import { useQueryApplying } from '../hooks/useQueryApply'
 
 export interface Props {
   selectedPartnerApprovalCheckItem: number
@@ -51,7 +51,7 @@ const PartnerApprovalCheckModal: VFC<Props> = (props) => {
     selectedPartnerApprovalCheckItem,
     onClosePartnerApprovalCheckDialog,
   } = props
-  const { data: partnerApply } = useQueryApply()
+  const { data: partnerApply } = useQueryApplying()
   const { createGroupMutation } = useMutatePartner()
   const { status, data } = useQueryPartner()
   return (

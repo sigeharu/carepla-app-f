@@ -4,7 +4,7 @@ import { PartnerApply, Apply } from '../types/types'
 import { selectUser } from '../slices/userSlice'
 import { useAppSelector } from '../app/hooks'
 
-export const useQueryApply = () => {
+export const useQueryApplying = () => {
   const User = useAppSelector(selectUser)
   const getApply = async () => {
     const { data } = await axios.get<Apply[]>(

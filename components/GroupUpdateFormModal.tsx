@@ -67,12 +67,12 @@ const GroupUpdateFormModal: VFC<Props> = (props) => {
           <ModalCloseButton />
           <form onSubmit={submitHandler}>
             <ModalBody>
-              <Box>
+              <VStack>
                 <FormControl>
                   <Textarea
                     ref={initialRef}
                     className="mb-3"
-                    bg="white"
+                    bg="orange.100"
                     placeholder="グループ名"
                     type="textarea"
                     onChange={(e) =>
@@ -89,7 +89,7 @@ const GroupUpdateFormModal: VFC<Props> = (props) => {
                 <FormControl>
                   <Textarea
                     className="mb-3"
-                    bg="white"
+                    bg="orange.100"
                     placeholder="グループの説明"
                     type="textarea"
                     onChange={(e) =>
@@ -103,27 +103,34 @@ const GroupUpdateFormModal: VFC<Props> = (props) => {
                     value={editedPartner.partner_group_description}
                   />
                 </FormControl>
-              </Box>
+              </VStack>
             </ModalBody>
-            <ModalFooter>
-              <HStack>
-                <Box>
-                  <button
-                    className="disabled:opacity-40 py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded"
+
+            <Center>
+              <ModalFooter>
+                <HStack>
+                  <Button
+                    className="disabled:opacity-40 py-2 px-3 text-white rounded"
+                    bg="orange.300"
                     disabled={
                       !editedPartner.partner_group ||
                       !editedPartner.partner_group_description
                     }
                     type="submit"
                   >
-                    予定変更
-                  </button>
-                </Box>
-                <Button colorScheme="gray" onClick={onCloseUpdateDialog}>
-                  やめる
-                </Button>
-              </HStack>
-            </ModalFooter>
+                    グループ編集
+                  </Button>
+
+                  <Button
+                    bg="purple.300"
+                    textColor="white"
+                    onClick={onCloseUpdateDialog}
+                  >
+                    やめる
+                  </Button>
+                </HStack>
+              </ModalFooter>
+            </Center>
           </form>
         </ModalContent>
       </Modal>
